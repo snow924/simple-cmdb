@@ -1,0 +1,39 @@
+﻿{% extends 'navi.html' %}
+
+
+{% block content %}
+### ansible-playbook use saved password or not###
+<form action="/select/" method="post">
+
+<br/>
+auth:
+{{ result }}
+<br/> <br/>
+Saved Password List:
+<br/> <br/>
+   <select name="mypassword">
+    {% for passwd in result %}
+       <option value ="{{ passwd }}">{{ passwd }}</option>
+    {% endfor %}
+  </select>
+<br/> <br/>
+<input type='checkbox' name='box1' id='box1'> use saved password
+<br/> <br/>
+-------------
+<br/> <br/>
+If don't choose saved password,default use key auth
+<br/> <br/>
+playbook List:
+<br/> <br/>
+    <select name="playbook_select">
+    {% for file in file_list %}
+       <option value ="{{ file }}">{{ file }}</option>
+    {% endfor %}
+    </select>
+
+  <input type="submit" value="Submit" />
+<br/>
+<br/>
+### ansible-playbook ###
+</form>
+{% endblock %}

@@ -1,0 +1,86 @@
+﻿{% extends 'navi.html' %}
+{% block content %}
+
+上传文件
+<form  action="/upload/" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+    {% csrf_token %}
+    <input type="file" name="t_file" multiple="" value="" />
+    <button>Submit</button>
+</form>
+
+<br>
+
+<form  id='code' action="/code_update/" method="post" >
+选择发布主机组：
+<br>
+<select id="gp">
+  {% for group in result %}
+     <option value ="{{ group.id }}">{{ group }}</option>
+  {% endfor %}
+</select>
+<br>
+主机列表：
+<div id="iplist"> </div>
+{#    <br>#}
+{#    {% for host in sg %}#}
+{#     <input type='checkbox' name='ip' > {{ host.ip }}#}
+{#    {%  endfor %}#}
+<br>
+<p3> 代码发布 </p3>
+<br>
+{#<input type="button" value="更新" id="update">#}
+<button id="update">更新</button>
+{#<br>   <br>#}
+{#<p3> 代码回滚 </p3>#}
+{#<br>#}
+{#<button>回滚</button>#}
+</form>
+
+{#<br>#}
+执行结果：
+<div id="result"></div>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://malsup.github.io/jquery.form.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+$('#gp').change(function () {
+       group_id= $("#gp option:selected").val();
+       console.log(group_id);
+$.ajax({
+    type: "post",
+    url: "/code/",
+    data: {"group_id": group_id},
+    dataType:"json",
+    success:function(ret) {
+{#        alert(slist);#}
+{#         console.log(ret);#}
+        host=$('#iplist');
+        host.empty()
+         $.each(ret.hosts, function (index, value) {
+          host.append("<input type='checkbox' name='checkbox' value="+value+">"+value+"<br>")
+         });
+      }
+})
+});
+
+{#$("#update").click(#}
+{#        function () {#}
+{#            alert("update")#}
+{##}
+{# }#}
+{#)#}
+$("#code").ajaxForm(function (data) {
+    $("#result").html(data)
+{#    alert(data)#}
+})
+
+});
+</script>
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,61 @@
+﻿{% extends 'navi.html' %}
+
+
+
+{% block content %}
+
+<br>
+选择发布主机组：
+<br>
+   <select id="gp">
+    {% for group in result %}
+       <option value ="{{ group.id }}">{{ group }}</option>
+    {% endfor %}
+  </select>
+
+    <br>
+
+    主机列表2：
+    <br>
+    <br>
+    {% for host in sg %}
+     <input type='checkbox' name='box1' id='box1'> {{ host.ip }}
+    {%  endfor %}
+
+<p3> 代码发布 </p3>
+    <form action="/code_update" method="post" >
+        <button>更新</button>
+    </form>
+<p3> 代码回滚 </p3>
+    <form action="/code_update" method="post" >
+        <button>回滚</button>
+    </form>
+
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#gp').change(function () {
+{#           alert('group');#}
+       group_id= $("#gp  option:selected").val();
+           console.log(group_id);
+
+$.ajax({
+    type: "post",
+    url: "/code/",
+    data: {"group_id": group_id}
+})
+    });
+  });
+
+
+</script>
+
+
+{% endblock %}
+
+
+
+

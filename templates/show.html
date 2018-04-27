@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<body>
+{% include 'navi.html' %}
+
+{#{% block content %}#}
+
+<style>
+#example_wrapper {
+    margin-left: 0;
+top: -900px;
+
+}
+</style>
+
+<div class="container-fluid"  style="margin-left:200;margin-top: 0;">
+
+
+
+<table  id="example"  >
+
+<thead>
+<tr>
+<th>主机名</th>
+<th>ip地址</th>
+<th>MAC地址</th>
+<th>OS</th>
+<th>CPU</th>
+<th>CPU核数</th>
+<th>CPU数量</th>
+<th>内存</th>
+<th>磁盘</th>
+<th>sn</th>
+{#<th>idc</th>#}
+{#<th>角色</th>#}
+<th>操作</th>
+</tr>
+</thead>
+
+{% for data in result %}
+<tr>
+<td> {{ data.hostname }} </td>
+<td> {{ data.ip }} </td>
+<td> {{ data.mac }} </td>
+<td> {{ data.os }} </td>
+<td> {{ data.cpu }} </td>
+<td> {{ data.cpu_cores }} </td>
+<td> {{ data.cpu_count }} </td>
+<td> {{ data.mem }} </td>
+<td> {{ data.disk }} </td>
+<td> {{ data.sn }} </td>
+{#<td> {{ data.idc.name }} </td>#}
+{#<td> {% for role in data.role.all %}#}
+{#        {{ role }}#}
+{#    {% endfor %}#}
+{#    </td>#}
+<td>
+<button type="button" id="{{data.id}}" class="btn btn-xs btn-primary">更新 </button>
+<button type="button" id="{{data.id}}" class="btn btn-xs btn-primary">删除 </button>
+</td>
+
+</tr>
+
+{% endfor%}
+</table>
+
+</div>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+<script>
+ $(document).ready(function() {
+ $("#example").dataTable();
+});
+</script>
+
+{#{% endblock %}#}
+
+</body>
+</html>

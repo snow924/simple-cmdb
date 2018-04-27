@@ -1,0 +1,15 @@
+﻿{% extends 'navi.html' %}
+
+
+{% block content %}
+<form action="/paging/" method="post">
+###paging###
+<br/> <br/>
+   <select name="mypassword">
+       <option value ="yiban">yiban</option>
+       <option value ="ying">ying</option>
+  </select>
+<br/> <br/>
+  <input type="submit" value="Submit" />
+</form>
+{% endblock %}

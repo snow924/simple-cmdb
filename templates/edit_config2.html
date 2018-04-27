@@ -1,0 +1,67 @@
+<head>
+<title>index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--   引入jQuery -->
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+<link type="text/css" rel="stylesheet" href="../js/bootstrap/css/bootstrap.css">
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#zbx_conf").click(function(){
+        $("zbx_conf_div").remove();
+        var append_div = $("#zbx_conf_div");
+        $("#btn_post").before(append_div);
+        $.get("/edit/", function(data){
+            $("#zbx_conf_div").html(data);
+        })
+    })
+})
+</script>
+ 
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#btn_post_save").click(function(){
+        if($("#zbx_conf_div").length>0){
+            var data = $("#zbx_conf_div").val();
+            $.post("/edit/", { 'name':data  });
+        }
+    })
+})
+</script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tab-pane">
+                <button id="zbx_conf" type="button"  class="btn btn-primary">载入配置文件</button>
+                <div>
+                    <textarea id="zbx_conf_div" name="config_data" style="background:#CBD8E6;" class="input-block-level comments" rows="25"></textarea>
+                    <a id="btn_post" href="#save" role="button"   class="btn btn-danger pull-right span2" data-toggle="modal">保存配置</a>
+                    <button type="button" id="btn_post"  class="btn btn-danger pull-right span2" data-toggle="modal"   data-target="#save">保存配置2</button>
+                </div>
+            </div>
+        </div>
+         <div class="modal fade" id="save" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                         <h4 class="modal-title" id="myModalLabel">保存确认</h4>
+                     </div>
+                     <div class="modal-body">
+                        内容已更改,是否进行保存
+                     </div>
+                     <div class="modal-footer">
+                        <a data-dismiss="modal" class="btn btn-primary span3">关闭</a>
+                        <a data-dismiss="modal" id="btn_post_save" type="submit" class="btn  btn-danger pull-right span2">保存</a>
+                     </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+</body>
+</html>

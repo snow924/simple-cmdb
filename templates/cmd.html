@@ -1,0 +1,16 @@
+﻿{% extends 'navi.html' %}
+
+
+{% block content %}
+<br/> <br/>
+ansible commands. this use ssh-key
+<br/><br/>
+
+<form action="/cmd_result/" method="post">
+  Hostgroup: <input type="text" name="hostgroup" />
+  -m: <input type="text" name="module" />
+  -a: <input type="text" name="args" />
+      <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

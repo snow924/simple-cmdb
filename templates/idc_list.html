@@ -1,0 +1,56 @@
+
+
+<html xmlns="http://www.w3.org/1999/html">
+
+<body>
+{% include 'navi.html' %}
+
+{#{% block content %}#}
+
+<style>
+#example_wrapper {
+    margin-left: 0;
+top: -900px;
+
+}
+</style>
+
+<div class="container-fluid"  style="margin-left:200;margin-top: 0;">
+
+
+
+<table  id="example"  >
+
+<thead>
+<tr>
+<th>序号</th>
+<th>IDC</th>
+</tr>
+</thead>
+
+{% for idc in result %}
+<tr>
+<th>{{ idc.id }}  </th>
+<th>{{ idc.name }}  </th>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+<script>
+ $(document).ready(function() {
+ $("#example").dataTable();
+});
+</script>
+
+{#{% endblock %}#}
+
+</body>
+</html>

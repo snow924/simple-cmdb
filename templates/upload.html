@@ -1,0 +1,12 @@
+﻿{% extends 'navi.html' %}
+
+
+{% block content %}
+    配置文件上传    
+    <form action="/upload/" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+        {% csrf_token %}
+        <input type="file" name="t_file" multiple="" value="" />
+        <button>Submit</button>
+    </form>
+
+{% endblock %}
